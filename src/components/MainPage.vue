@@ -4,6 +4,8 @@
     <h2>We are undergo heavy renovation! Please check soon again!</h2>
     <h3>Updated: May 6th, 2022</h3>
     <button><router-link to="/">Get Out!</router-link></button>
+    <br />
+    <button><router-link to="/userpage">Come in...</router-link></button>
 
     <table id="contentBoard">
       <tr>
@@ -19,6 +21,8 @@
         <td>A special board for special folks...</td>
       </tr>
     </table>
+    <br />
+    <audio controls src="assets/Ranch.mp3"></audio>
   </div>
 </template>
 
@@ -63,5 +67,10 @@ td {
   border: 1px solid;
   padding-left: 6px;
   padding-right: 6px;
+}
+audio {
+  bottom: 0;
+  position: fixed;
+  right: 0;
 }
 </style>

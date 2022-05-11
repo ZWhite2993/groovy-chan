@@ -1,25 +1,83 @@
 <template>
   <div id="randomBoard">
-    <h2>Make An Anonymous Post?</h2>
+    <h2>Make An Post?</h2>
     <form>
-      <input id="postTitle" type="text" placeholder="Post Title" required />
-      <br>
-      <textarea id="postContent" placeholder="Post Content"></textarea>
-      <br>
-      <input id="postAuthor" type="text" placeholder="Author" required />
+      <p id="errorMessage" v-if="this.errors.length">{{ this.errors[0] }}</p>
+      <input
+        id="postTitle"
+        type="text"
+        placeholder="Post Title"
+        v-model="post.title"
+        required
+      />
+      <br />
+      <textarea
+        id="postContent"
+        placeholder="Post Content"
+        v-model="post.content"
+        required
+      ></textarea>
+      <br />
+      <input
+        id="postAuthor"
+        type="text"
+        placeholder="Author"
+        v-model="post.author"
+      />
+      <br />
+      <button v-on:click.prevent="submitForm">POST</button>
     </form>
-    <button>Submit Post</button>
-    <br>
-    <button><router-link to="/">RETURN</router-link></button>
+    <button><router-link to="/main">RETURN</router-link></button>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      post: {
+        title: "",
+        content: "",
+        author: "",
+        id: 0,
+      },
+      posts: [],
+      errors: [],
+    };
   },
-  methods: {},
+  methods: {
+    submitForm: function () {
+      this.checkForm();
+      if (!this.errors.length) {
+        const storedPosts = JSON.parse(localStorage.getItem("posts")) || [];
+        let maxId = 0;
+        for (let i = 0; i < storedPosts.length; i++) {
+          const thisPostId = storedPosts[i].id;
+          if (thisPostId > maxId) {
+            maxId = thisPostId;
+          }
+        }
+        this.post.id = maxId + 1;
+        this.posts.push(this.post);
+        localStorage.setItem("posts", JSON.stringify(this.posts));
+        this.$router.push("/randomposts");
+      }
+    },
+    checkForm: function () {
+      this.errors = [];
+
+      if (!this.post.content) {
+        this.errors.push("Please Submit Post Content.");
+        console.log(this.errors);
+      }
+    },
+  },
+  created() {
+    const storedPosts = JSON.parse(localStorage.getItem("posts"));
+    if (storedPosts !== null) {
+      this.posts = storedPosts;
+    }
+  },
 };
 </script>
 
@@ -44,10 +102,23 @@ textarea {
   padding: 8px;
   width: 20%;
 }
-textarea{
+textarea {
   width: 20%;
 }
 button {
   margin-top: 10px;
+}
+#posts {
+  background-color: #eee;
+  width: 20%;
+  margin: 0 auto;
+  margin-top: 10px;
+  text-align: left;
+  padding: 5px 5px 5px 5px;
+  border: 1px solid;
+}
+#errorMessage {
+  font-weight: bold;
+  color: red;
 }
 </style>

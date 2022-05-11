@@ -14,8 +14,8 @@
     <button><router-link to="/main">Enter!</router-link></button>
     <br>
     <img src="http://www.textfiles.com/underconstruction/Nebula5275_underconstructionsmall1.gif" alt="skull-with-shovels">
-
-    <audio src="assets/Super.mp3" autoplay ></audio>
+    <br>
+    <audio controls src="assets/Super.mp3" ></audio>
   </div>
 </template>
 
@@ -68,5 +68,10 @@ a:visited {
 }
 router-link {
   text-decoration: none;
+}
+audio {
+  bottom: 0;
+  position: fixed;
+  right: 0;
 }
 </style>
