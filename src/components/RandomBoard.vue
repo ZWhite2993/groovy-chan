@@ -6,7 +6,7 @@
       <input
         id="postTitle"
         type="text"
-        placeholder="Post Title"
+        placeholder="Post Title (Optional)"
         v-model="post.title"
         required
       />
@@ -21,7 +21,7 @@
       <input
         id="postAuthor"
         type="text"
-        placeholder="Author"
+        placeholder="Author (Optional)"
         v-model="post.author"
       />
       <br />
