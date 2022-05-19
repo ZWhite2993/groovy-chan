@@ -1,19 +1,30 @@
 <template>
-  <div id="randomPosts">
-    <div id="randomPostsContainer">
-    <h1 v-if="!randomPosts.length">NO POSTS FOUND</h1>
-    <ul>
-      <li id="postList" v-for="post in randomPosts" :key="post.id">
-        <p class="postData">No. {{ post.id }}</p>
-        <p><router-link id="postReply" v-bind:to="'/posts/' + post.id">Reply</router-link></p>
-        <hr>
-        <p class="postData" v-if="post.title"><strong>Subject: </strong>{{ post.title }}</p>
-        <p class="postData" id="postContent">{{ post.content }}</p>
-        <p class="postData" id="postAuthor" v-if="post.author"><strong>Author: </strong>{{ post.author }}</p>
-      </li>
-    </ul>
-
-    
+  <div class="postsContainer" id="randomPosts">
+    <div class="randomPostsContainer">
+      <h1 v-if="!randomPosts.length" :style="{ color: 'white' }">
+        NO POSTS FOUND
+      </h1>
+      <ul>
+        <li class="postList" v-for="post in randomPosts" :key="post.id">
+          <p class="postData">No. {{ post.id }}</p>
+          <p>
+            [<router-link
+              id="postReply"
+              v-bind:to="'/posts/' + post.id"
+              :style="{ color: 'blue' }"
+              >Reply</router-link
+            >]
+          </p>
+          <hr />
+          <p class="postData" v-if="post.title">
+            <strong>Subject: </strong>{{ post.title }}
+          </p>
+          <p class="postData" id="postContent">{{ post.content }}</p>
+          <p class="postData" id="postAuthor" v-if="post.author">
+            <strong>Author: </strong>{{ post.author }}
+          </p>
+        </li>
+      </ul>
     </div>
     <button><router-link to="/random">Return to Post Page</router-link></button>
   </div>
@@ -27,32 +38,25 @@ export default {
     };
   },
   methods: {},
-  
+
   created() {
     this.randomPosts = JSON.parse(localStorage.getItem("posts")) || [];
-    console.log(localStorage.getItem("posts"))
+    console.log(localStorage.getItem("posts"));
   },
 };
 </script>
 
 <style>
-#randomPosts {
-  background-image: url(https://wallup.net/wp-content/uploads/2015/12/126274-nature-landscape-sky-hill-grass-field-clouds-Windows_XP.jpg);
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  left: 0px;
-  bottom: 0px; 
+.postsContainer {
   text-align: center;
 }
-#randomPostsContainer{
+.randomPostsContainer {
   background-color: #333;
   padding-top: 0px;
   width: 40%;
   margin: 0 auto;
-
 }
-#postList {
+.postList {
   list-style: none;
   background-color: whitesmoke;
   width: 80%;
@@ -67,10 +71,9 @@ export default {
   margin-bottom: 0px;
   margin-top: 10px;
 }
-ul{
+ul {
   padding-top: 10px;
   padding-bottom: 40px;
   padding-left: 0px;
 }
-
 </style>
