@@ -31,6 +31,7 @@
       <div class="randomPostsContainer" v-if="this.hasReplied">
       <ul>
         <li
+          v-for="post in posts" :key="post.id"
           class="postList"
           id="replyList"
         >
@@ -44,8 +45,7 @@
             Reply
           </p>
           <hr />
-           <!-- <p>Replied to post No. {{ this.randomPosts.length - 1}}</p>
-           //it doesnt render anything to the page because im overwriting every post -->
+           <!-- <p>Replied to post No. {{ this.randomPosts.length - 1}}</p>-->
           <p v-if="post.title" class="postData">
             <strong>Subject: </strong>{{ post.title }}
           </p>
@@ -125,7 +125,6 @@ export default {
         this.post.id = maxId + 1;
         this.posts.push(this.post);
         localStorage.setItem("posts", JSON.stringify(this.posts));
-        this.$router.push('/posts/' + this.post.id.length - 1);
       }
     },
     checkForm: function () {

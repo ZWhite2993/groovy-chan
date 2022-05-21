@@ -1,19 +1,15 @@
-import homePage from "./components/HomePage"
-import mainPage from "./components/MainPage"
-import failurePage from "./components/FailurePage"
-import randomBoard from "./components/RandomBoard"
-import randomPosts from "./components/RandomPosts"
-import userPage from "./components/UserPage"
-import replyThread from "./components/ReplyThread"
+import homePage from "./views/HomePage"
+import mainPage from "./views/MainPage"
+import failurePage from "./views/FailurePage"
+import randomBoard from "./views/RandomBoard"
+import randomPosts from "./views/RandomPosts/RandomPosts.vue"
+import userPage from "./views/UserPage"
+import replyThread from "./views/ReplyThread"
 
 export default [
   {
     path: "/",
     component: homePage
-  },
-  {
-    path: "/main",
-    component: mainPage
   },
   {
     path: "/main",
